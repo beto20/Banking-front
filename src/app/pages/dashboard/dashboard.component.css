@@ -1,0 +1,68 @@
+#container {
+    background-color: blue;
+    width: max-content;
+    margin: 30px 75px 30px 75px;
+}
+
+#card {
+    border-radius: 18px;
+    background-color: aquamarine;
+    padding: 30px 30px 60px 30px;
+    width: max-content;
+    height: max-content;
+    align-content: center;
+}
+
+#image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+#title {
+    color: blue;
+    width: max-content;
+    text-align: center;
+    padding: auto;
+    margin-bottom: 30px;
+}
+
+#description {
+    width: 225px;
+    margin-bottom: 75px;
+}
+
+#description ul, h4 {
+    color: red;
+    text-align: left;
+}
+#description ul {
+    padding-left: 20px;
+}
+
+#description ul li {
+    color: black;
+    margin-bottom: 7px;
+}
+
+#btn-get {
+    display: flex;
+    justify-content: center;
+}
+
+#btn-get button {
+    width: 200px;
+    height: 50px;
+    background-color: rgb(67, 174, 220);
+    border-radius: 10px;
+}
+
+#btn-get :hover {
+    background-color: gray;
+}
+
+#btn-get span {
+    font-size: larger;
+    color: white;
+    font-weight: 600;
+}
