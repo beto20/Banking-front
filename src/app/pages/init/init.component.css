@@ -1,0 +1,62 @@
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+}
+
+#init {
+    border: 10px solid;
+    border-width: 10px;
+    border-color: aquamarine;
+    padding: 20px 20px 20px 20px;
+    background-color: bisque;
+}
+
+#title {
+    font-size: 28px;
+    margin-bottom: 50px;
+}
+
+#input-doc, #input-ndoc {
+    margin-bottom: 15px;
+    width: max-content;
+}
+
+#input-doc input {
+    margin-bottom: 20px;
+    height: 40px;
+    width: 300px;
+    font-size: medium;
+    border-radius: 5px;
+}
+
+#input-ndoc input {
+    margin-bottom: 20px;
+    height: 40px;
+    width: 300px;
+    font-size: medium;
+    border-radius: 5px;
+}
+
+#btn-buscar {
+    display: flex;
+    justify-content: center;
+}
+
+#btn-buscar button {
+    width: 200px;
+    height: 50px;
+    background-color: rgb(67, 174, 220);
+    border-radius: 10px;
+}
+
+#btn-buscar :hover {
+    background-color: gray;
+}
+
+#btn-buscar span {
+    font-size: larger;
+    color: white;
+    font-weight: 600;
+}
