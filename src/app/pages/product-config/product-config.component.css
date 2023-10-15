@@ -1,0 +1,138 @@
+#container {
+    display: flex;
+    justify-content: center;
+}
+
+#information-container {
+    margin-top: 50px;
+    height: max-content;
+    padding-right: 100px;
+}
+
+#title-product {
+    color: blue;
+    width: max-content;
+    text-align: center;
+    padding: auto;
+    margin-bottom: 30px;
+}
+
+#description {
+    width: 325px;
+    margin-bottom: 75px;
+}
+
+#description ul, h4 {
+    color: red;
+    text-align: left;
+}
+#description ul {
+    padding-left: 20px;
+}
+
+#description ul li {
+    color: black;
+    margin-bottom: 7px;
+}
+
+
+#title-product-data {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+#column {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+#row {
+    justify-content: center;
+}
+
+#input-data {
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    width: max-content;
+}
+
+#input-data input {
+    height: 40px;
+    width: 300px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid rgb(190, 189, 189);
+    text-transform:uppercase;
+}
+
+#input-data input::placeholder {
+    text-transform: none;
+}
+
+#input-data input:focus {
+    outline: none !important;
+    border:1px solid rgb(255, 254, 254);
+    box-shadow: 0 0 10px #719ECE;
+}
+
+#select-input {
+    text-transform: uppercase;
+    height: 40px;
+    width: 308px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid rgb(190, 189, 189);
+}
+
+#select-input:focus {
+    outline: none !important;
+    border:1px solid rgb(255, 254, 254);
+    box-shadow: 0 0 10px #719ECE;
+}
+
+#btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+#btn button {
+    width: 200px;
+    height: 50px;
+    background-color: rgb(67, 174, 220);
+    border-radius: 10px;
+}
+
+#btn :hover {
+    background-color: gray;
+}
+
+#btn span {
+    font-size: larger;
+    color: white;
+    font-weight: 600;
+}
+
+#btn-next {
+    margin-bottom: 10px;
+    padding-left: 100px;
+    align-self: flex-end;
+}
+
+#btn-next button {
+    width: 200px;
+    height: 50px;
+    background-color: rgb(67, 174, 220);
+    border-radius: 10px;
+}
+
+#btn-next :hover {
+    background-color: gray;
+}
+
+#btn-next span {
+    font-size: larger;
+    color: white;
+    font-weight: 600;
+}
