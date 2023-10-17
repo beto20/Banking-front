@@ -10,7 +10,7 @@
 }
 
 #title-product {
-    color: blue;
+    font-family: system-ui;
     width: max-content;
     text-align: center;
     padding: auto;
@@ -23,7 +23,7 @@
 }
 
 #description ul, h4 {
-    color: red;
+    font-family: system-ui;
     text-align: left;
 }
 #description ul {
@@ -31,7 +31,6 @@
 }
 
 #description ul li {
-    color: black;
     margin-bottom: 7px;
 }
 
@@ -62,6 +61,7 @@
 label {
     font-size: 18px;
     font-weight: 500;
+    font-family: system-ui;
     color: #333333;
 
 }
@@ -69,7 +69,23 @@ label {
 p {
     font-size: 16px;
     font-weight: 600;
+    font-family: system-ui;
     color: #9C9C9C;
+}
+
+button {
+    width: 200px;
+    height: 50px;
+    background-color: #ffc107;
+    border-radius: 10px;
+    border: 0px transparent;
+}
+
+span {
+    font-size: larger;
+    color: rgb(97, 90, 57);
+    font-weight: 600;
+    font-family: system-ui;
 }
 
 #btn-next {
@@ -78,19 +94,6 @@ p {
     align-self: flex-end;
 }
 
-#btn-next button {
-    width: 200px;
-    height: 50px;
-    background-color: rgb(67, 174, 220);
-    border-radius: 10px;
-}
-
 #btn-next :hover {
-    background-color: gray;
-}
-
-#btn-next span {
-    font-size: larger;
-    color: white;
-    font-weight: 600;
+    background-color: rgb(206, 206, 206);
 }

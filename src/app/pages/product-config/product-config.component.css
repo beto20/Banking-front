@@ -10,7 +10,7 @@
 }
 
 #title-product {
-    color: blue;
+    font-family: system-ui;
     width: max-content;
     text-align: center;
     padding: auto;
@@ -23,7 +23,7 @@
 }
 
 #description ul, h4 {
-    color: red;
+    font-family: system-ui;
     text-align: left;
 }
 #description ul {
@@ -31,13 +31,14 @@
 }
 
 #description ul li {
-    color: black;
+    font-family: system-ui;
     margin-bottom: 7px;
 }
 
 
 #title-product-data {
     font-size: 28px;
+    font-family: system-ui;
     margin-bottom: 30px;
 }
 
@@ -51,6 +52,7 @@
 }
 
 #input-data {
+    font-family: system-ui;
     margin-left: 8px;
     margin-right: 8px;
     margin-bottom: 10px;
@@ -61,6 +63,7 @@
     height: 40px;
     width: 300px;
     font-size: 14px;
+    font-family: system-ui;
     border-radius: 5px;
     border: 1px solid rgb(190, 189, 189);
     text-transform:uppercase;
@@ -81,6 +84,7 @@
     height: 40px;
     width: 308px;
     font-size: 14px;
+    font-family: system-ui;
     border-radius: 5px;
     border: 1px solid rgb(190, 189, 189);
 }
@@ -97,21 +101,19 @@
     margin-top: 12px;
 }
 
-#btn button {
+button {
     width: 200px;
     height: 50px;
-    background-color: rgb(67, 174, 220);
+    background-color: #ffc107;
     border-radius: 10px;
+    border: 0px transparent;
 }
 
-#btn :hover {
-    background-color: gray;
-}
-
-#btn span {
+span {
     font-size: larger;
-    color: white;
+    color: rgb(97, 90, 57);
     font-weight: 600;
+    font-family: system-ui;
 }
 
 #btn-next {
@@ -120,19 +122,10 @@
     align-self: flex-end;
 }
 
-#btn-next button {
-    width: 200px;
-    height: 50px;
-    background-color: rgb(67, 174, 220);
-    border-radius: 10px;
-}
-
 #btn-next :hover {
-    background-color: gray;
+    background-color: rgb(206, 206, 206);
 }
 
-#btn-next span {
-    font-size: larger;
-    color: white;
-    font-weight: 600;
+#btn :hover {
+    background-color: rgb(206, 206, 206);
 }

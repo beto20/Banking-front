@@ -10,9 +10,9 @@
 }
 
 #title-product {
-    color: blue;
     width: max-content;
     text-align: center;
+    font-family: system-ui;
     padding: auto;
     margin-bottom: 30px;
 }
@@ -23,21 +23,20 @@
 }
 
 #description ul, h4 {
-    color: red;
     text-align: left;
+    font-family: system-ui;
 }
 #description ul {
     padding-left: 20px;
 }
 
 #description ul li {
-    color: black;
     margin-bottom: 7px;
 }
 
-
 #title-personal-data {
     font-size: 28px;
+    font-family: system-ui;
     margin-bottom: 30px;
 }
 
@@ -57,12 +56,14 @@
     margin-right: 8px;
     margin-bottom: 10px;
     width: max-content;
+    font-family: system-ui;
 }
 
 #input-data input {
     height: 40px;
     width: 300px;
     font-size: 14px;
+    font-family: system-ui;
     border-radius: 5px;
     border: 1px solid rgb(190, 189, 189);
     text-transform:uppercase;
@@ -83,6 +84,7 @@
     height: 40px;
     width: 308px;
     font-size: 14px;
+    font-family: system-ui;
     border-radius: 5px;
     border: 1px solid rgb(190, 189, 189);
 }
@@ -93,11 +95,19 @@
     box-shadow: 0 0 10px #719ECE;
 }
 
-#btn-cancel button {
+button {
     width: 200px;
     height: 50px;
-    background-color: rgb(67, 174, 220);
+    background-color: #ffc107;
     border-radius: 10px;
+    border: 0px transparent;
+}
+
+span {
+    font-size: larger;
+    color: rgb(97, 90, 57);
+    font-weight: 600;
+    font-family: system-ui;
 }
 
 #btn-cancel {
@@ -106,13 +116,7 @@
 }
 
 #btn-cancel :hover {
-    background-color: gray;
-}
-
-#btn-cancel span {
-    font-size: larger;
-    color: white;
-    font-weight: 600;
+    background-color: rgb(206, 206, 206);
 }
 
 #btn-next {
@@ -121,19 +125,6 @@
     align-self: flex-end;
 }
 
-#btn-next button {
-    width: 200px;
-    height: 50px;
-    background-color: rgb(67, 174, 220);
-    border-radius: 10px;
-}
-
 #btn-next :hover {
-    background-color: gray;
-}
-
-#btn-next span {
-    font-size: larger;
-    color: white;
-    font-weight: 600;
+    background-color: rgb(206, 206, 206);
 }

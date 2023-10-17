@@ -1,51 +1,58 @@
 #container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    grid-template-columns: repeat(auto-fill, minmax(400px, auto));
     align-items: center;
     justify-content: center;
-    background-color: blue;
     margin: 30px 75px 30px 75px;
 }
 
 #card {
     border-radius: 18px;
-    background-color: aquamarine;
+    background-color: rgb(14, 51, 96);
     padding: 30px 30px 60px 30px;
     width: max-content;
     height: max-content;
     align-content: center;
-    margin: 10px 10px 10px 10px;
+    margin: 50px 50px 50px 50px;
 }
 
 #image {
     display: flex;
     justify-content: center;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
+}
+
+#image img {
+    width: 170px;
+    height: 170px;
 }
 
 #title {
-    color: blue;
+    color: whitesmoke;
     width: max-content;
     text-align: center;
     padding: auto;
     margin-bottom: 30px;
+    font-family: system-ui;
 }
 
 #description {
+    color: whitesmoke;
     width: 225px;
     margin-bottom: 75px;
+    font-family: system-ui;
 }
 
 #description ul, h4 {
-    color: red;
     text-align: left;
+    font-family: system-ui;
 }
 #description ul {
     padding-left: 20px;
 }
 
 #description ul li {
-    color: black;
+    color: whitesmoke;
     margin-bottom: 7px;
 }
 
@@ -57,16 +64,18 @@
 #btn-get button {
     width: 200px;
     height: 50px;
-    background-color: rgb(67, 174, 220);
+    background-color: #ffc107;
     border-radius: 10px;
+    border: 0px transparent;
 }
 
 #btn-get :hover {
-    background-color: gray;
+    background-color: rgb(206, 206, 206);
 }
 
 #btn-get span {
     font-size: larger;
-    color: white;
+    color: rgb(97, 90, 57);
     font-weight: 600;
+    font-family: system-ui;
 }
