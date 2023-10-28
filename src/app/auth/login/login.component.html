@@ -1,16 +1,18 @@
 <div id="container">
-    <div id="login">
-        <div id="image">
-            <img src="../../../assets/img/login-logo.png" alt="">
+    <form [formGroup]="loginForm" (ngSubmit)="validateCredentials()">
+        <div id="login">
+            <div id="image">
+                <img src="../../../assets/img/login-logo.png" alt="">
+            </div>
+            <div id="input-user">
+                <input type="text" placeholder="Usuario" formControlName="username">
+            </div>
+            <div id="input-password">
+                <input type="password" placeholder="Contraseña" formControlName="password">
+            </div>
+            <div id="btn-login">
+                <button type="submit"><span>Iniciar sesión</span></button>
+            </div>
         </div>
-        <div id="input-user">
-            <input type="text" placeholder="Usuario">
-        </div>
-        <div id="input-password">
-            <input type="password" placeholder="Contraseña">
-        </div>
-        <div id="btn-login">
-            <button><span>Iniciar sesión</span></button>
-        </div>
-    </div>
+    </form>
 </div>
