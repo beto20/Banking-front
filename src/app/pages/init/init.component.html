@@ -1,16 +1,18 @@
 <div id="container">
-    <div id="init">
-        <div id="title">
-            <p>Búsqueda de cliente</p>
+    <form [formGroup]="client" (ngSubmit)="searchByDocument()">
+        <div id="init">
+            <div id="title">
+                <p>Búsqueda de cliente</p>
+            </div>
+            <div id="input-doc">
+                <input type="text" placeholder="Documento de identidad" formControlName="docType" >
+            </div>
+            <div id="input-ndoc">
+                <input type="text" placeholder="Nro. de documento" formControlName="docNumber">
+            </div>
+            <div id="btn-buscar">
+                <button><span>Buscar</span></button>
+            </div>
         </div>
-        <div id="input-doc">
-            <input type="text" placeholder="Documento de identidad">
-        </div>
-        <div id="input-ndoc">
-            <input type="text" placeholder="Nro. de documento">
-        </div>
-        <div id="btn-buscar">
-            <button><span>Buscar</span></button>
-        </div>
-    </div>
+    </form>
 </div>

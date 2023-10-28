@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ProductConfigComponent } from './product-config/product-config.component';
 import { SaleComponent } from './sale/sale.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { SaleComponent } from './sale/sale.component';
         SaleComponent,
     ],
     imports: [
-        RouterModule
+        RouterModule,
+        ReactiveFormsModule
     ],
     exports: [
         PagesComponent
