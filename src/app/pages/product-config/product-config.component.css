@@ -101,12 +101,19 @@
     margin-top: 12px;
 }
 
-button {
+button, #button {
     width: 200px;
     height: 50px;
     background-color: #ffc107;
     border-radius: 10px;
     border: 0px transparent;
+}
+
+#button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
 }
 
 span {

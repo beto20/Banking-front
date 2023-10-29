@@ -54,6 +54,7 @@ export class PersonalInfoComponent implements OnInit {
 
   submit() {
     console.log(this.customer.value.name)
+    this.router.navigateByUrl('/credit/product-config')
   }
 
   annuled() {

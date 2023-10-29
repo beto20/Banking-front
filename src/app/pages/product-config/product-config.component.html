@@ -1,3 +1,5 @@
+<form [formGroup]="saleFormGroup" (ngSubmit)="saleProcess()">
+
 <div id="container">
 
     <div id="information-container">
@@ -14,7 +16,7 @@
             </ul>
         </div>
         <div id="btn">
-            <button><span>Anular expediente</span></button>
+            <span id="button" (click)="annuled()">Anular expediente</span>
         </div>
     </div>
 
@@ -23,6 +25,7 @@
             <p>Configuracion de producto</p>
         </div>
 
+        <form [formGroup]="evaluationFormGroup" (ngSubmit)="creditEvaluation()">
         <div id="column">
             <div id="row">
                 <div id="input-data">
@@ -30,7 +33,7 @@
                         <label for="">Linea de tarjeta</label>
                     </div>
                     <div>
-                        <input type="number" name="" id="name" placeholder="Linea de tarjeta" required>
+                        <input type="number" name="" id="name" placeholder="Linea de tarjeta" required formControlName="creditLine">
                     </div>
                 </div>
                 <div id="input-data">
@@ -38,7 +41,8 @@
                         <label for="">Monto ofrecido</label>
                     </div>
                     <div>
-                        <input type="text" name="" id="" placeholder="Monto ofrecido" disabled>
+                        <!-- <input type="text" name="" id="" placeholder="Monto ofrecido" [formControl]="offerAmount"> -->
+                        <label id="output">{{ offerAmount }}</label>
                     </div>
                 </div>
             </div>
@@ -48,7 +52,7 @@
                         <label for="">Monto solicitado</label>
                     </div>
                     <div>
-                        <input type="number" name="" id="" placeholder="Monto solicitado">
+                        <input type="number" name="" id="" placeholder="Monto solicitado" formControlName="requestedAmount">
                     </div>
                 </div>
             </div>
@@ -58,7 +62,9 @@
                 </div>
             </div>
         </div>
+        </form>
 
+        <form [formGroup]="simulationFormGroup" (ngSubmit)="creditSimulation(offerAmount)">
         <div id="column">
             <div id="row">
                 <div id="input-data">
@@ -66,7 +72,8 @@
                         <label for="">Monto ofrecido</label>
                     </div>
                     <div>
-                        <input type="text" name="" id="name" placeholder="Monto ofrecido" disabled>
+                        <!-- <input type="text" name="" id="name" placeholder="Monto ofrecido" > -->
+                        <label id="output">{{ offerAmount }}</label>
                     </div>
                 </div>
             </div>
@@ -83,10 +90,11 @@
             </div>
             <div id="row">
                 <div id="btn">
-                    <button><span>Simular</span></button>
+                    <button ><span>Simular</span></button>
                 </div>
             </div>
         </div>
+        </form>
 
         <div id="column">
             <div id="row">
@@ -95,10 +103,10 @@
                         <label for="">Cuenta a desembolsar</label>
                     </div>
                     <div>
-                        <select id="select-input" name="select">
+                        <select id="select-input" name="select" formControlName="account">
                             <option value="value1" disabled selected hidden>Seleccione</option>
-                            <option value="value2">Nueva</option>
-                            <option value="value3">Existente</option>
+                            <option value="Nueva">Nueva</option>
+                            <option value="Existente">Existente</option>
                         </select>
                     </div>
                 </div>
@@ -109,10 +117,10 @@
                         <label for="">Nro. de cuenta</label>
                     </div>
                     <div>
-                        <select id="select-input" name="select">
+                        <select id="select-input" name="select" formControlName="accountNumber">
                             <option value="value1" disabled selected hidden>Seleccione cuenta</option>
                             <option value="value2">12345</option>
-                            <option value="value3">12345</option>
+                            <option value="value3" [value]="mock">12345</option>
                         </select>
                     </div>
                 </div>
@@ -121,11 +129,14 @@
         </div>
     </div>
 
-    
+     
 
 
     <div id="btn-next">
-        <button><span>Solicitar</span></button>
+        <!-- <button (click)="processSale()"><span>Solicitar</span></button> -->
+        <button ><span>Solicitar</span></button>
     </div>
 
 </div>
+
+<!-- </form> -->
