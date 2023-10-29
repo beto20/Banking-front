@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -15,18 +14,10 @@ export class LoginComponent {
     password: new FormControl('')
   });
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) {}
+  constructor(private readonly authService: AuthService) {}
 
   validateCredentials() {
-    console.log('Login username: ', this.loginForm.value.username)
-    console.log('Login password: ', this.loginForm.value.password)
-
-    const hasAccess = this.authService.getToken(this.loginForm.value.username , this.loginForm.value.password )
-
-    console.log(hasAccess)
-    if(hasAccess === true) {
-      this.router.navigateByUrl('/init')
-    }
+    this.authService.getToken(this.loginForm.value.username , this.loginForm.value.password );
   }
 
 }
