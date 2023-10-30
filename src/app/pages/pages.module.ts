@@ -7,6 +7,7 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ProductConfigComponent } from './product-config/product-config.component';
 import { SaleComponent } from './sale/sale.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -18,8 +19,10 @@ import { ReactiveFormsModule } from "@angular/forms";
         SaleComponent,
     ],
     imports: [
+        ReactiveFormsModule,
+        SharedModule,
         RouterModule,
-        ReactiveFormsModule
+
     ],
     exports: [
         PagesComponent

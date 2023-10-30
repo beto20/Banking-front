@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../service/customer.service';
 import { Router } from '@angular/router';
+import { ExpedientResponse, ExpedientService } from '../../service/expedient.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -23,6 +24,7 @@ export class PersonalInfoComponent implements OnInit {
   });
 
   constructor(private readonly customerService: CustomerService,
+    private readonly expedientService: ExpedientService,
     private readonly router: Router) {}
 
   ngOnInit(): void {
@@ -52,13 +54,15 @@ export class PersonalInfoComponent implements OnInit {
     return customer;
   }
 
-  submit() {
+  next() {
     console.log(this.customer.value.name)
     this.router.navigateByUrl('/credit/product-config')
   }
 
   annuled() {
     console.log('anular')
+    this.expedientService.annuled('EXP0001');
+    this.router.navigateByUrl('/dashboard')
   }
 
 }

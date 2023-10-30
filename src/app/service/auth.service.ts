@@ -58,8 +58,9 @@ export class AuthService {
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
-        console.log('getJwtToken:', result.getAccessToken().getJwtToken());
-        sessionStorage.setItem('session', 'Bearer ' + result.getAccessToken().getJwtToken());
+        const token = result.getAccessToken().getJwtToken()
+        console.log('getJwtToken:', token);
+        sessionStorage.setItem('session', 'Bearer ' + token);
         this.router.navigateByUrl('/init')
       },
       onFailure: (error) => {

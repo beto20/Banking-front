@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreditService } from 'src/app/service/credit.service';
+import { ExpedientService } from 'src/app/service/expedient.service';
 
 @Component({
   selector: 'app-product-config',
@@ -29,12 +30,14 @@ export class ProductConfigComponent {
   accountNumber? : any;
 
   constructor(private readonly creditService: CreditService,
+    private readonly expedientService: ExpedientService,
     private readonly router: Router) {}
 
-
-  annuled() {
-    console.log('anular')
-  }
+    annuled() {
+      console.log('anular')
+      this.expedientService.annuled('EXP0001');
+      this.router.navigateByUrl('/dashboard')
+    }
 
   creditEvaluation() {
     this.creditLine = this.evaluationFormGroup.value.creditLine;
