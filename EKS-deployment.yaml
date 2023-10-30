@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alfa-banking
+spec:
+  selector:
+    matchLabels:
+      app: alfa-banking
+  strategy:
+    type: RollingUpdate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alfa-banking
+    spec:
+      containers:
+        - name: alfa-banking
+          image: albertovs/alfa-banking-front:v1.0
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "300m"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: app-port
+              containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alfa-banking-service
+  labels:
+    app: alfa-banking
+spec:
+  type: LoadBalancer
+  selector:
+    app: alfa-banking
+  ports:
+    - protocol: TCP
+      port: 80
