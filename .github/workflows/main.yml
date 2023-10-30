@@ -1,0 +1,46 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - master
+permissions:
+  id-token: write
+  contents: read
+env:
+  REGISTRY_PATH: ${{secrets.ECR}}
+  VERSION_SHA: ${{github.sha}}
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: AWS authentication
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{secrets.AWS_IAM_ROLE}}
+          role-duration-seconds: 1200
+          role-session-name: ${{github.sha}}
+          aws-region: us-west-2
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Docker build and push
+        run: |
+          docker build -t $REGISTRY_PATH:$VERSION_SHA .
+          docker push $REGISTRY_PATH:$VERSION_SHA
+
+      - name: Deploy to EKS
+        run: |
+          aws eks update-kubeconfig --region us-west-2 --name alfa
+          kubectl apply -f EKS-deployment.yaml -n develop
+          kubectl set image deployment/alfa-banking alfa-banking=$REGISTRY_PATH:$VERSION_SHA -n develop
