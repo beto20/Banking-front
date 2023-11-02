@@ -1,11 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   registerCustomer(customerDto: any) {
 
@@ -52,33 +54,36 @@ export class CustomerService {
     return result;
   }
 
-  getProducts(customer: any): ProductResponse[] {
+  getProducts(): Observable<ProductResponse[]> {
 
     const token = sessionStorage.getItem('session')
     console.log("token:", token)
 
-    const result: ProductResponse[] = [
-      { 
-        title: "",
-        freeField1: "",
-        freeField2: "",
-        freeField3: "",
-        freeField4: "",
-        freeField5: "",
-        imageURL: "",
-      },
-      { 
-        title: "",
-        freeField1: "",
-        freeField2: "",
-        freeField3: "",
-        freeField4: "",
-        freeField5: "",
-        imageURL: "",
-      }
-    ]
+    // let result: ProductResponse
 
-    return result;
+    const m = this.http.get<ProductResponse[]>('http://10.100.176.55:8080/api/v1/products/false');
+
+    // m.subscribe((resp: ProductResponse[]) => {
+      
+    //   resp.push
+
+    //   // result: ProductResponse = { 
+    //   //   title: resp.title,
+    //   //   freeField1: resp.freeField1,
+    //   //   freeField2: resp.freeField2,
+    //   //   freeField3: resp.freeField3,
+    //   //   freeField4: resp.freeField4,
+    //   //   freeField5: resp.freeField5,
+    //   //   imageURL: resp.imageURL,
+    //   // }
+
+
+    // });
+
+
+    return m;
+
+    // return result;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../service/customer.service';
 import { Router } from '@angular/router';
@@ -8,10 +8,17 @@ import { Router } from '@angular/router';
   templateUrl: './init.component.html',
   styleUrls: ['./init.component.css']
 })
-export class InitComponent {
+export class InitComponent implements OnInit {
 
   constructor(private readonly customerService: CustomerService, 
     private readonly router: Router) {}
+
+  ngOnInit(): void {
+    this.customerService.getProducts().subscribe((resp) => {
+      console.log(resp);
+    })
+    
+  }
 
   client = new FormGroup({
     docType: new FormControl(''),
