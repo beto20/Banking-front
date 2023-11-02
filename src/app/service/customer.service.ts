@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,88 +7,76 @@ import { Observable } from 'rxjs';
 })
 export class CustomerService {
 
+  host: string = 'https://localhost';
+  customerPath: string = 'api/v1/customers';
+  productPath: string = 'api/v1/products';
+
   constructor(private http: HttpClient) { }
 
   registerCustomer(customerDto: any) {
-
     const token = sessionStorage.getItem('session')
     console.log("token:", token)
 
-    // DTO structure move this to the component
-    // const customerDto = { 
-    //   name: "",
-    //   middleName: "",
-    //   lastName: "",
-    //   motherLastName: "",
-    //   maritalStatus: "",
-    //   birthdate: "",
-    //   documentType: "",
-    //   documentNumber: "",
-    //   gender: "",
-    //   email: "",
-    //   phone: "",
-    // }
-
-  }
-
-  searchByDocument(docType: any, docNumber: any): CustomerResponse {
-
-    const token = sessionStorage.getItem('session')
-    console.log("token:", token)
-
-    const result: CustomerResponse = { 
-      name: "",
-      middleName: "",
-      lastName: "",
-      motherLastName: "",
-      maritalStatus: "",
-      birthdate: "",
-      documentType: "",
-      documentNumber: "",
-      gender: "",
-      age: 1,
-      email: "",
-      phone: "",
+    const customerRequest: ICustomerRequest = { 
+      name: customerDto.name,
+      middleName: customerDto.middleName,
+      lastName: customerDto.lastName,
+      motherLastName: customerDto.motherLastName,
+      maritalStatus: customerDto.maritalStatus,
+      birthdate: customerDto.birthdate,
+      documentType: customerDto.documentType,
+      documentNumber: customerDto.documentNumber,
+      gender: customerDto.gender,
+      email: customerDto.email,
+      phone: customerDto.phone,
     }
 
-    return result;
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    }
+
+    return this.http.post(`${this.host}/${this.customerPath}/register`, customerRequest, header);
   }
 
-  getProducts(): Observable<ProductResponse[]> {
-
+  searchByDocument(docType: any, docNumber: any): Observable<ICustomerResponse> {
     const token = sessionStorage.getItem('session')
     console.log("token:", token)
 
-    // let result: ProductResponse
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    }
 
-    const m = this.http.get<ProductResponse[]>('http://10.100.176.55:8080/api/v1/products/false');
+    return this.http.get<ICustomerResponse>(`${this.host}/${this.customerPath}/${docType}/${docNumber}`, header);
+  }
 
-    // m.subscribe((resp: ProductResponse[]) => {
-      
-    //   resp.push
+  getProducts(isCustomer: boolean): Observable<IProductResponse[]> {
+    const token = sessionStorage.getItem('session')
+    console.log("token:", token)
 
-    //   // result: ProductResponse = { 
-    //   //   title: resp.title,
-    //   //   freeField1: resp.freeField1,
-    //   //   freeField2: resp.freeField2,
-    //   //   freeField3: resp.freeField3,
-    //   //   freeField4: resp.freeField4,
-    //   //   freeField5: resp.freeField5,
-    //   //   imageURL: resp.imageURL,
-    //   // }
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    }
 
-
-    // });
-
-
-    return m;
-
-    // return result;
+    return this.http.get<IProductResponse[]>(`${this.host}/${this.productPath}/${isCustomer}`, header);
   }
 
 }
 
-export interface CustomerResponse { 
+export interface ICustomerRequest { 
+  name: string;
+  middleName: string;
+  lastName: string;
+  motherLastName: string;
+  maritalStatus: string;
+  birthdate: string;
+  documentType: string;
+  documentNumber: string;
+  gender: string;
+  email: string;
+  phone: string;
+}
+
+export interface ICustomerResponse { 
   name: string;
   middleName: string;
   lastName: string;
@@ -103,7 +91,7 @@ export interface CustomerResponse {
   phone: string;
 }
 
-export interface ProductResponse { 
+export interface IProductResponse { 
   title: string;
   freeField1: string;
   freeField2: string;

@@ -1,69 +1,84 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpedientService {
 
-  constructor() { }
+  host: string = 'https://localhost';
+  expedientPath: string = 'api/v1/expedients';
+
+  constructor(private http: HttpClient) { }
 
   create(expedientDto: any) {
-
     const token = sessionStorage.getItem('session');
     console.log("token:", token);
 
-    // DTO structure move this to the component
-    // const expedientDto: ExpedientResponse = {
-    //   productCode: "",
-    //   expedientNumber: "",
-    //   expedientPersonId: "",
-    //   status: "",
-    //   productName: "",
-    //   description: "",
-    //   name: "",
-    //   middleName: "",
-    //   lastName: "",
-    //   motherLastName: "",
-    //   maritalStatus: "",
-    //   documentType: "",
-    //   documentNumber: "",
-    // }
-
-  }
-
-  getExpedient(): ExpedientResponse {
-    const token = sessionStorage.getItem('session');
-    console.log("token:", token);
-
-
-    const result: ExpedientResponse = {
-      productCode: "",
-      expedientNumber: "",
-      expedientPersonId: "",
-      status: "",
-      productName: "",
-      description: "",
-      name: "",
-      middleName: "",
-      lastName: "",
-      motherLastName: "",
-      maritalStatus: "",
-      documentType: "",
-      documentNumber: "",
+    const request: IExpedientRequest = {
+      productCode: expedientDto.productCode,
+      expedientNumber: expedientDto.expedientNumber,
+      expedientPersonId: expedientDto.expedientPersonId,
+      status: expedientDto.status,
+      productName: expedientDto.productName,
+      description: expedientDto.description,
+      name: expedientDto.name,
+      middleName: expedientDto.middleName,
+      lastName: expedientDto.lastName,
+      motherLastName: expedientDto.motherLastName,
+      maritalStatus: expedientDto.maritalStatus,
+      documentType: expedientDto.documentType,
+      documentNumber: expedientDto.documentNumber,
     }
 
-    return result;
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    }
+
+    return this.http.post(`${this.host}/${this.expedientPath}/generate`, request, header);
+  }
+
+  getExpedient(expedientNumber: any): Observable<IExpedientResponse> {
+    const token = sessionStorage.getItem('session');
+    console.log("token:", token);
+
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    }
+
+    return this.http.get<IExpedientResponse>(`${this.host}/${this.expedientPath}/${expedientNumber}`, header);
   }
 
   annuled(expedientNumber: any) {
     const token = sessionStorage.getItem('session');
     console.log("token:", token);
 
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    }
 
+    return this.http.post(`${this.host}/${this.expedientPath}/cancel/${expedientNumber}`, header);
   }
 }
 
-export interface ExpedientResponse {
+export interface IExpedientResponse {
+  productCode: string;
+  expedientNumber: string;
+  expedientPersonId: string;
+  status: string;
+  productName: string;
+  description: string;
+  name: string;
+  middleName: string;
+  lastName: string;
+  motherLastName: string;
+  maritalStatus: string;
+  documentType: string;
+  documentNumber: string;
+}
+
+export interface IExpedientRequest {
   productCode: string;
   expedientNumber: string;
   expedientPersonId: string;
