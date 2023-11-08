@@ -21,6 +21,7 @@ export class PersonalInfoComponent implements OnInit {
     motherLastname: new FormControl(''),
     phone: new FormControl(''),
     docNumber: new FormControl(''),
+    gender: new FormControl('')
   });
 
   constructor(private readonly customerService: CustomerService,
@@ -55,6 +56,19 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   next() {
+    sessionStorage.setItem('documentNumber', this.customer.value.docNumber + "");
+    sessionStorage.setItem('name', this.customer.value.name + "");
+    sessionStorage.setItem('middleName', this.customer.value.middleName + "");
+    sessionStorage.setItem('lastName', this.customer.value.fatherLastname + "");
+    sessionStorage.setItem('motherLastName', this.customer.value.motherLastname + "");
+    // sessionStorage.setItem('maritalStatus', this.customer.value.name + "");
+    // sessionStorage.setItem('age', resp.age.toString());
+    sessionStorage.setItem('gender', this.customer.value.gender + "");
+    sessionStorage.setItem('birthdate', this.customer.value.birthday + "");
+    sessionStorage.setItem('email', this.customer.value.email + "");
+    sessionStorage.setItem('documentType', this.customer.value.docType + "");
+    sessionStorage.setItem('phone', this.customer.value.phone + "");
+
     console.log(this.customer.value.name)
     this.router.navigateByUrl('/credit/product-config')
   }

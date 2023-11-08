@@ -43,31 +43,43 @@ export class ProductConfigComponent {
     this.creditLine = this.evaluationFormGroup.value.creditLine;
     this.requestedAmount = this.evaluationFormGroup.value.requestedAmount;
 
-    console.log('evaluate')
-    console.log('creditLine value', this.creditLine)
-    console.log('requestedAmount value', this.requestedAmount)
-    this.offerAmount = 3000.00
-
     const evaluationDto = {
-      documentType: "DNI",
-      documentNumber: "41572392",
+      documentType: sessionStorage.getItem('documentType'),
+      documentNumber: sessionStorage.getItem('documentNumber'),
       creditLine: this.creditLine,
       amountRequired: this.requestedAmount,
     }
 
-    this.creditService.evaluation(evaluationDto).subscribe(res => console.log(res));
+    this.creditService.evaluation(evaluationDto).subscribe(res => {
+      this.offerAmount = (res.minAmountApproved + res.maxAmountApproved) / 2
+      sessionStorage.setItem('offerAmount', this.offerAmount);
+      sessionStorage.setItem('creditLine', this.creditLine);
+      sessionStorage.setItem('requestedAmount', this.requestedAmount);
+      sessionStorage.setItem('tea', res.tea);
+      console.log(res)
+    });
   }
 
   creditSimulation(offerAmount: any) {
     console.log('simulate')
     console.log('offerAmount value', offerAmount)
 
+    let tea: string | null;
+    tea = sessionStorage.getItem('tea');
+
+    if (tea === null) {
+      tea = '0.14'
+    }
+
     const simulationDto = {
-      tea: 0.14,
+      tea: parseFloat(tea),
       simulationAmount: offerAmount
     }
 
-    this.creditService.simulation(simulationDto).subscribe(res => console.log(res));;
+    this.creditService.simulation(simulationDto).subscribe(res => {
+      
+      console.log(res)
+    });
   }
 
   saleProcess() {
@@ -80,13 +92,19 @@ export class ProductConfigComponent {
     console.log('saleFunc', this.account)
     console.log('saleFunc', this.accountNumber)
 
+    let tea: string | null = sessionStorage.getItem('tea');
+    let x = tea === null ? '0.14' : tea;
+
+
+
+
     const saleDto = {
       expedientNumber: "EXP00001", // FALTA
       creditType: "HIPOTECARIO", // FALTA
       creditLine: this.creditLine,
       requestedAmount: this.requestedAmount,
       agreedAmount: this.offerAmount,
-      interestRate: 0.14,
+      interestRate: parseFloat(x),
       quota: "",
       term: "",
       hasDebt: false, // FALTA
@@ -94,14 +112,14 @@ export class ProductConfigComponent {
       disbursementType: this.account,
       disbursementAccount: this.accountNumber,
       hasAccount: true,
-      name: "",
-      lastname: "",
-      gender: "",
-      birthdate: "",
-      document: "",
-      documentNumber: "",
-      email: "",
-      phone: "",
+      name: sessionStorage.getItem('name'),
+      lastname: sessionStorage.getItem('lastname'),
+      gender: sessionStorage.getItem('gender'),
+      birthdate: sessionStorage.getItem('birthdate'),
+      document: sessionStorage.getItem('documentType'),
+      documentNumber: sessionStorage.getItem('documentNumber'),
+      email: sessionStorage.getItem('email'),
+      phone: sessionStorage.getItem('phone'),
       isClient: true,
     }
 

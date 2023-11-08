@@ -1,20 +1,25 @@
 <app-header></app-header>
 
 <div id="container">
-    <div id="card" style="border: 10px;">
+
+
+    <div id="card" style="border: 10px;" >
         <div id="image">
             <img src="../../../assets/img/login-logo.png" alt="">
         </div>
         <div id="title">
-            <h2>Credito Hipotecario</h2>
+            <h2>Credito Hipotecario - </h2>
         </div>
         <div id="description">
             <h3>Descripcion de producto</h3>
-            <ul>
-                <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit.</li>
+            <ul >
+                <li *ngFor="let item of products">
+                    {{item.freeField1}}
+                </li>
+                <!-- <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit. {{item.freeField1}}</li>
+                <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit. {{item.freeField2}}</li>
+                <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit. {{item.freeField3}}</li>
+                <li>Lorem ipsum dolor sit amet con sectetur adipisicing elit. {{item.freeField4}}</li> -->
             </ul>
         </div>
         <div id="btn-get">
@@ -22,7 +27,7 @@
         </div>
     </div>
 
-    <div id="card" style="border: 10px;">
+    <!-- <div id="card" style="border: 10px;">
         <div id="image">
             <img src="../../../assets/img/login-logo.png" alt="">
         </div>
@@ -83,6 +88,6 @@
         <div id="btn-get">
             <button><span>Obtener producto</span></button>
         </div>
-    </div>
+    </div> -->
 
 </div>

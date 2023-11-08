@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
@@ -7,10 +7,16 @@ import { AuthService } from 'src/app/service/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+
+  clientData = sessionStorage.getItem('documentNumber') === '' || null ? 'No cliente' : 'Cliente: ' + sessionStorage.getItem('documentNumber')
 
   constructor(private readonly authService: AuthService, 
     private readonly router: Router) {}
+  
+  ngOnInit(): void {
+    this.clientData
+  }
 
   closeSession() {
     this.authService.logout();
