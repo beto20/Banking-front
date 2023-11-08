@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class CustomerService {
 
-  host: string = 'https://localhost';
-  customerPath: string = 'api/v1/customers';
-  productPath: string = 'api/v1/products';
+  host: string = 'https://afbe5c57d41594d48a6f6580cf160214-2089909704.us-west-2.elb.amazonaws.com';
+  customerPath: string = 'alfa-customer/api/v1/customers';
+  productPath: string = 'alfa-customer/api/v1/products';
 
   constructor(private http: HttpClient) { }
 

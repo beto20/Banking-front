@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../service/customer.service';
 import { Router } from '@angular/router';
-import { ExpedientResponse, ExpedientService } from '../../service/expedient.service';
+import {  ExpedientService } from '../../service/expedient.service';
 
 @Component({
   selector: 'app-personal-info',

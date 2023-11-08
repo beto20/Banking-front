@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ExpedientService {
 
-  host: string = 'https://localhost';
-  expedientPath: string = 'api/v1/expedients';
+  host: string = 'https://afbe5c57d41594d48a6f6580cf160214-2089909704.us-west-2.elb.amazonaws.com';
+  expedientPath: string = 'alfa-expedient/api/v1/expedients';
 
   constructor(private http: HttpClient) { }
 

@@ -14,7 +14,7 @@ export class InitComponent implements OnInit {
     private readonly router: Router) {}
 
   ngOnInit(): void {
-    this.customerService.getProducts().subscribe((resp) => {
+    this.customerService.getProducts(true).subscribe((resp) => {
       console.log(resp);
     })
     
@@ -26,11 +26,11 @@ export class InitComponent implements OnInit {
   });
 
   searchByDocument() {
-
     console.log(this.client.value.docType)
     console.log(this.client.value.docNumber)
 
     this.customerService.searchByDocument(this.client.value.docType, this.client.value.docNumber)
+    .subscribe((resp) => console.log(resp));
 
     this.router.navigateByUrl('/dashboard')
   }

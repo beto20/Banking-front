@@ -55,7 +55,7 @@ export class ProductConfigComponent {
       amountRequired: this.requestedAmount,
     }
 
-    this.creditService.evaluation(evaluationDto);
+    this.creditService.evaluation(evaluationDto).subscribe(res => console.log(res));
   }
 
   creditSimulation(offerAmount: any) {
@@ -67,7 +67,7 @@ export class ProductConfigComponent {
       simulationAmount: offerAmount
     }
 
-    this.creditService.simulation(simulationDto);
+    this.creditService.simulation(simulationDto).subscribe(res => console.log(res));;
   }
 
   saleProcess() {
@@ -105,7 +105,7 @@ export class ProductConfigComponent {
       isClient: true,
     }
 
-    this.creditService.sale(saleDto);
+    this.creditService.sale(saleDto).subscribe(res => console.log(res));;
     this.router.navigateByUrl('/credit/sale')
   }
 
