@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { CustomerService, IProductResponse } from 'src/app/service/customer.service';
-import { ExpedientService } from 'src/app/service/expedient.service';
+import { ExpedientService, IExpedientRequest } from 'src/app/service/expedient.service';
+import { CreditService } from 'src/app/service/credit.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
   constructor(private readonly authService: AuthService,
     private readonly customerService: CustomerService, 
     private readonly expedientService: ExpedientService, 
+    private readonly creditService: CreditService, 
     private readonly router: Router) {}
 
     ngOnInit(): void {
@@ -32,6 +34,15 @@ export class DashboardComponent implements OnInit {
           console.log(resp);
         })
       
+      this.creditService.validateBlacklist(document)
+        .subscribe(res => {
+          console.log(res);
+          if (res.hasBlacklist) {
+            alert('No se pude continuar con el cliente');
+            this.router.navigateByUrl('/init');
+          }
+        })
+
     }
 
   closeSession() {
@@ -40,6 +51,6 @@ export class DashboardComponent implements OnInit {
   }
 
   generateExpedient() {
-    this.expedientService.create("");
+    this.expedientService.create('').subscribe(res => console.log(res));
   }
 }

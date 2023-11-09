@@ -16,25 +16,40 @@ export class ExpedientService {
     const token = sessionStorage.getItem('session');
     console.log("token:", token);
 
+    console.log("exp 2"+expedientDto)
+
+    const name = sessionStorage.getItem('name');
+    const middlename = sessionStorage.getItem('name');
+    const lastName = sessionStorage.getItem('name');
+    const motherLastName = sessionStorage.getItem('name');
+    const maritalStatus = sessionStorage.getItem('maritalStatus');
+    const documentType = sessionStorage.getItem('documentType');
+    const documentNumber = sessionStorage.getItem('documentNumber');
+
+    const expNumber = Math.random() * 1000;
+    const x = Math.round(expNumber)
+    
     const request: IExpedientRequest = {
-      productCode: expedientDto.productCode,
-      expedientNumber: expedientDto.expedientNumber,
-      expedientPersonId: expedientDto.expedientPersonId,
-      status: expedientDto.status,
-      productName: expedientDto.productName,
-      description: expedientDto.description,
-      name: expedientDto.name,
-      middleName: expedientDto.middleName,
-      lastName: expedientDto.lastName,
-      motherLastName: expedientDto.motherLastName,
-      maritalStatus: expedientDto.maritalStatus,
-      documentType: expedientDto.documentType,
-      documentNumber: expedientDto.documentNumber,
+      productCode: 'CREDITO_0001',
+      expedientNumber: 'EXP_' + x,
+      expedientPersonId: '',
+      status: 'ACTIVO',
+      productName: 'CREDITO',
+      description: 'mock',
+      name: name + '',
+      middleName: middlename + '',
+      lastName: lastName + '',
+      motherLastName: motherLastName + '',
+      maritalStatus: '',
+      documentType: documentType + '',
+      documentNumber: documentNumber + ''
     }
 
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
     }
+
+    sessionStorage.setItem('expedientNumber', request.expedientNumber);
 
     return this.http.post(`${this.host}/${this.expedientPath}/generate`, request, header);
   }
@@ -58,7 +73,7 @@ export class ExpedientService {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
     }
 
-    return this.http.post(`${this.host}/${this.expedientPath}/cancel/${expedientNumber}`, header);
+    return this.http.patch(`${this.host}/${this.expedientPath}/cancel/${expedientNumber}`, header);
   }
 }
 

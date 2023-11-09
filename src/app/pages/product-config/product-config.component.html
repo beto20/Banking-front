@@ -80,10 +80,18 @@
             <div id="row">
                 <div id="input-data">
                     <div>
-                        <label for="">Segundo Nombre</label>
+                        <label for="">Cuotas de pago</label>
                     </div>
                     <div>
-                        <input type="text" name="" id="" placeholder="Ingrese nombre">
+                        <select id="select-input" name="select" formControlName="quotas">
+                            <option value="value1" disabled selected hidden>Seleccione</option>
+                            <option [value]="term1"> {{ term1 }} </option>
+                            <option [value]="term2"> {{ term2 }} </option>
+                            <option [value]="term3"> {{ term3 }} </option>
+                            <option [value]="term4"> {{ term4 }} </option>
+                            <option [value]="term5"> {{ term5 }} </option>
+                            <option [value]="term6"> {{ term6 }} </option>
+                        </select>
                     </div>
                 </div>
 
@@ -118,9 +126,9 @@
                     </div>
                     <div>
                         <select id="select-input" name="select" formControlName="accountNumber">
-                            <option value="value1" disabled selected hidden>Seleccione cuenta</option>
-                            <option value="value2">12345</option>
-                            <option value="value3" [value]="mock">12345</option>
+                            <option [value]="account0">Seleccione cuenta</option>
+                            <option [value]="account1"> {{account1}} </option>
+                            <option [value]="account2"> {{account2}} </option>
                         </select>
                     </div>
                 </div>

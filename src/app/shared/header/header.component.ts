@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
+import { CreditService } from 'src/app/service/credit.service';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +12,27 @@ export class HeaderComponent implements OnInit {
 
   clientData = sessionStorage.getItem('documentNumber') === '' || null ? 'No cliente' : 'Cliente: ' + sessionStorage.getItem('documentNumber')
 
-  constructor(private readonly authService: AuthService, 
+  clientStatus = '';
+
+  constructor(private readonly authService: AuthService,
+    private readonly creditService: CreditService, 
     private readonly router: Router) {}
   
   ngOnInit(): void {
     this.clientData
+
+    const document = sessionStorage.getItem('documentNumber');
+    this.creditService.validateBlacklist(document)
+    .subscribe(res => {
+      console.log(res);
+      if (res.isPotential) {
+        this.clientStatus = 'Potencial'
+      }
+      if (res.isRisky) {
+        this.clientStatus = 'Por evaluar'
+      }
+    })
+
   }
 
   closeSession() {

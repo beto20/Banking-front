@@ -32,6 +32,7 @@ export class InitComponent implements OnInit {
 
     this.customerService.searchByDocument(this.client.value.docType, this.client.value.docNumber)
     .subscribe((resp) => {
+
       sessionStorage.setItem('documentNumber', this.client.value.docNumber + "");
       sessionStorage.setItem('name', resp.name);
       sessionStorage.setItem('middleName', resp.middleName);

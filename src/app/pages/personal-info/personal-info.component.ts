@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../service/customer.service';
 import { Router } from '@angular/router';
-import {  ExpedientService } from '../../service/expedient.service';
+import {  ExpedientService, IExpedientRequest } from '../../service/expedient.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -75,7 +75,9 @@ export class PersonalInfoComponent implements OnInit {
 
   annuled() {
     console.log('anular')
-    this.expedientService.annuled('EXP0001');
+    const expedientNumber = sessionStorage.getItem('expedientNumber');
+
+    this.expedientService.annuled(expedientNumber).subscribe(data => console.log(data));
     this.router.navigateByUrl('/dashboard')
   }
 

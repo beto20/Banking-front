@@ -9,7 +9,7 @@ import { ExpedientService } from 'src/app/service/expedient.service';
   templateUrl: './product-config.component.html',
   styleUrls: ['./product-config.component.css']
 })
-export class ProductConfigComponent {
+export class ProductConfigComponent implements OnInit {
 
   mock = '123465761245'
 
@@ -33,11 +33,17 @@ export class ProductConfigComponent {
     private readonly expedientService: ExpedientService,
     private readonly router: Router) {}
 
-    annuled() {
-      console.log('anular')
-      this.expedientService.annuled('EXP0001');
-      this.router.navigateByUrl('/dashboard')
-    }
+  ngOnInit(): void {
+    this.existingAccount()
+  }
+
+  annuled() {
+    console.log('anular')
+    const expedientNumber = sessionStorage.getItem('expedientNumber');
+
+    this.expedientService.annuled(expedientNumber).subscribe(data => console.log(data));
+    this.router.navigateByUrl('/dashboard')
+  }
 
   creditEvaluation() {
     this.creditLine = this.evaluationFormGroup.value.creditLine;
@@ -60,6 +66,13 @@ export class ProductConfigComponent {
     });
   }
 
+  term1: string = '';
+  term2: string = '';
+  term3: string = '';
+  term4: string = '';
+  term5: string = '';
+  term6: string = '';
+
   creditSimulation(offerAmount: any) {
     console.log('simulate')
     console.log('offerAmount value', offerAmount)
@@ -77,9 +90,30 @@ export class ProductConfigComponent {
     }
 
     this.creditService.simulation(simulationDto).subscribe(res => {
-      
       console.log(res)
+
+      this.term1 = 'cuota: ' + res.installments[0].quota + ' - ' + res.installments[0].amount + ' - ' + res.installments[0].totalInterestAmount;
+      this.term2 = 'cuota: ' + res.installments[1].quota + ' - ' + res.installments[1].amount + ' - ' + res.installments[1].totalInterestAmount;
+      this.term3 = 'cuota: ' + res.installments[2].quota + ' - ' + res.installments[2].amount + ' - ' + res.installments[2].totalInterestAmount;
+      this.term4 = 'cuota: ' + res.installments[3].quota + ' - ' + res.installments[3].amount + ' - ' + res.installments[3].totalInterestAmount;
+      this.term5 = 'cuota: ' + res.installments[4].quota + ' - ' + res.installments[4].amount + ' - ' + res.installments[4].totalInterestAmount;
+      this.term6 = 'cuota: ' + res.installments[5].quota + ' - ' + res.installments[5].amount + ' - ' + res.installments[5].totalInterestAmount;
     });
+  }
+  account0: string = 'NUEVA';
+  account1: string = '';
+  account2: string = '';
+
+  existingAccount() {
+    const documentNumber = sessionStorage.getItem('documentNumber');
+
+    this.creditService.existingAccount(documentNumber).subscribe(res => {
+      console.log(res)
+
+      this.account1 = res[0].accountNumber + ' ' + res[0].currency;
+      this.account2 = res[1].accountNumber + ' ' + res[1].currency;
+    });
+
   }
 
   saleProcess() {
@@ -123,7 +157,7 @@ export class ProductConfigComponent {
       isClient: true,
     }
 
-    this.creditService.sale(saleDto).subscribe(res => console.log(res));;
+    this.creditService.sale(saleDto).subscribe(res => console.log(res));
     this.router.navigateByUrl('/credit/sale')
   }
 
