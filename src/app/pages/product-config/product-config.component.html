@@ -26,42 +26,42 @@
         </div>
 
         <form [formGroup]="evaluationFormGroup" (ngSubmit)="creditEvaluation()">
-        <div id="column">
-            <div id="row">
-                <div id="input-data">
-                    <div>
-                        <label for="">Linea de tarjeta</label>
+            <div id="column">
+                <div id="row">
+                    <div id="input-data">
+                        <div>
+                            <label for="">Linea de tarjeta</label>
+                        </div>
+                        <div>
+                            <input type="number" name="" id="name" placeholder="Linea de tarjeta" required formControlName="creditLine">
+                        </div>
                     </div>
-                    <div>
-                        <input type="number" name="" id="name" placeholder="Linea de tarjeta" required formControlName="creditLine">
+                    <div id="input-data">
+                        <div>
+                            <label for="">Monto ofrecido</label>
+                        </div>
+                        <div>
+                            <!-- <input type="text" name="" id="" placeholder="Monto ofrecido" [formControl]="offerAmount"> -->
+                            <label id="output">{{ offerAmount }}</label>
+                        </div>
                     </div>
                 </div>
-                <div id="input-data">
-                    <div>
-                        <label for="">Monto ofrecido</label>
+                <div id="row">
+                    <div id="input-data">
+                        <div>
+                            <label for="">Monto solicitado</label>
+                        </div>
+                        <div>
+                            <input type="number" name="" id="" placeholder="Monto solicitado" formControlName="requestedAmount">
+                        </div>
                     </div>
-                    <div>
-                        <!-- <input type="text" name="" id="" placeholder="Monto ofrecido" [formControl]="offerAmount"> -->
-                        <label id="output">{{ offerAmount }}</label>
+                </div>
+                <div id="row">
+                    <div id="btn">
+                        <button><span>Evaluar</span></button>
                     </div>
                 </div>
             </div>
-            <div id="row">
-                <div id="input-data">
-                    <div>
-                        <label for="">Monto solicitado</label>
-                    </div>
-                    <div>
-                        <input type="number" name="" id="" placeholder="Monto solicitado" formControlName="requestedAmount">
-                    </div>
-                </div>
-            </div>
-            <div id="row">
-                <div id="btn">
-                    <button><span>Evaluar</span></button>
-                </div>
-            </div>
-        </div>
         </form>
 
         <form [formGroup]="simulationFormGroup" (ngSubmit)="creditSimulation(offerAmount)">
@@ -85,12 +85,12 @@
                     <div>
                         <select id="select-input" name="select" formControlName="quotas">
                             <option value="value1" disabled selected hidden>Seleccione</option>
-                            <option [value]="term1"> {{ term1 }} </option>
-                            <option [value]="term2"> {{ term2 }} </option>
-                            <option [value]="term3"> {{ term3 }} </option>
-                            <option [value]="term4"> {{ term4 }} </option>
-                            <option [value]="term5"> {{ term5 }} </option>
-                            <option [value]="term6"> {{ term6 }} </option>
+                            <option [value]="term1"> cuota: {{ term1 }} </option>
+                            <option [value]="term2"> cuota: {{ term2 }} </option>
+                            <option [value]="term3"> cuota: {{ term3 }} </option>
+                            <option [value]="term4"> cuota: {{ term4 }} </option>
+                            <option [value]="term5"> cuota: {{ term5 }} </option>
+                            <option [value]="term6"> cuota: {{ term6 }} </option>
                         </select>
                     </div>
                 </div>
@@ -147,4 +147,4 @@
 
 </div>
 
-<!-- </form> -->
+</form>

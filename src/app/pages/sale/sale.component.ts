@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sale',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sale.component.css']
 })
 export class SaleComponent implements OnInit {
+
+  constructor(private readonly router: Router) {}
 
   completeName = '';
   cardNumber = '';
@@ -36,15 +39,19 @@ export class SaleComponent implements OnInit {
     const term = sessionStorage.getItem('term') + '';
 
     this.completeName = name + ' ' + midlename + ' ' + lastname + ' ' + motherlastname;
-    this.cardNumber = cardNumber;
-    this.brand = brand;
-    this.type = type;
+    this.cardNumber = '1928*******74348';
+    this.brand = 'VISA';
+    this.type = 'SIGNATURE';
     this.creditLine = creditLine;
     this.disbursementAmount = disbursementAmount;
     this.tea = tea;
-    this.quota = quota;
+    this.quota = Math.round(parseFloat(quota)).toFixed(2).toString();
     this.term = term;
 
+  }
+
+  finishFlow() {
+    this.router.navigate(['/dashboard']);
   }
 
 }

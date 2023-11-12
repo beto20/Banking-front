@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CustomerService {
 
-  host: string = 'https://afbe5c57d41594d48a6f6580cf160214-2089909704.us-west-2.elb.amazonaws.com';
+  host: string = 'https://ad172ad30c04646e9ba81fcac6dcc17a-813922458.us-west-2.elb.amazonaws.com';
   customerPath: string = 'alfa-customer/api/v1/customers';
   productPath: string = 'alfa-customer/api/v1/products';
 
@@ -53,6 +53,7 @@ export class CustomerService {
     const token = sessionStorage.getItem('session')
     console.log("token:", token)
 
+    isCustomer = false
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
     }

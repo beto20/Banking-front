@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CreditService {
 
-  host: string = 'https://afbe5c57d41594d48a6f6580cf160214-2089909704.us-west-2.elb.amazonaws.com';
+  host: string = 'https://ad172ad30c04646e9ba81fcac6dcc17a-813922458.us-west-2.elb.amazonaws.com';
   creditPath: string = 'alfa-credit/api/v1/credits';
   businessPath: string = 'alfa-credit/api/v1/business';
 

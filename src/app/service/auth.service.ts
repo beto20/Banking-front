@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 
 const POOLDATA = {
-  UserPoolId: '',
-  ClientId: ''
+  UserPoolId: 'us-west-2_XOw1N9u7a',
+  ClientId: '328dgt6e82ug7irk05er6cvurv'
 };
 
 @Injectable({

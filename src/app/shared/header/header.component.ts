@@ -40,4 +40,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+  backToInit() {
+    this.router.navigateByUrl('/init');
+    sessionStorage.clear();
+    return;
+  }
+
 }

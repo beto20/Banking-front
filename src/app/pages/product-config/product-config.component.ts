@@ -17,7 +17,9 @@ export class ProductConfigComponent implements OnInit {
     creditLine: new FormControl(),
     requestedAmount: new FormControl(),
   });
-  simulationFormGroup = new FormGroup({});
+  simulationFormGroup = new FormGroup({
+    quotas: new FormControl(),
+  });
   saleFormGroup = new FormGroup({
     account: new FormControl(),
     accountNumber: new FormControl(),
@@ -92,12 +94,12 @@ export class ProductConfigComponent implements OnInit {
     this.creditService.simulation(simulationDto).subscribe(res => {
       console.log(res)
 
-      this.term1 = 'cuota: ' + res.installments[0].quota + ' - ' + res.installments[0].amount + ' - ' + res.installments[0].totalInterestAmount;
-      this.term2 = 'cuota: ' + res.installments[1].quota + ' - ' + res.installments[1].amount + ' - ' + res.installments[1].totalInterestAmount;
-      this.term3 = 'cuota: ' + res.installments[2].quota + ' - ' + res.installments[2].amount + ' - ' + res.installments[2].totalInterestAmount;
-      this.term4 = 'cuota: ' + res.installments[3].quota + ' - ' + res.installments[3].amount + ' - ' + res.installments[3].totalInterestAmount;
-      this.term5 = 'cuota: ' + res.installments[4].quota + ' - ' + res.installments[4].amount + ' - ' + res.installments[4].totalInterestAmount;
-      this.term6 = 'cuota: ' + res.installments[5].quota + ' - ' + res.installments[5].amount + ' - ' + res.installments[5].totalInterestAmount;
+      this.term1 = res.installments[0].quota + ' - ' + res.installments[0].amount + ' - ' + res.installments[0].totalInterestAmount;
+      this.term2 = res.installments[1].quota + ' - ' + res.installments[1].amount + ' - ' + res.installments[1].totalInterestAmount;
+      this.term3 = res.installments[2].quota + ' - ' + res.installments[2].amount + ' - ' + res.installments[2].totalInterestAmount;
+      this.term4 = res.installments[3].quota + ' - ' + res.installments[3].amount + ' - ' + res.installments[3].totalInterestAmount;
+      this.term5 = res.installments[4].quota + ' - ' + res.installments[4].amount + ' - ' + res.installments[4].totalInterestAmount;
+      this.term6 = res.installments[5].quota + ' - ' + res.installments[5].amount + ' - ' + res.installments[5].totalInterestAmount;
     });
   }
   account0: string = 'NUEVA';
@@ -110,8 +112,8 @@ export class ProductConfigComponent implements OnInit {
     this.creditService.existingAccount(documentNumber).subscribe(res => {
       console.log(res)
 
-      this.account1 = res[0].accountNumber + ' ' + res[0].currency;
-      this.account2 = res[1].accountNumber + ' ' + res[1].currency;
+      this.account1 = res[0].accountNumber + ' - ' + res[0].currency;
+      this.account2 = res[1].accountNumber + ' - ' + res[1].currency;
     });
 
   }
@@ -119,35 +121,44 @@ export class ProductConfigComponent implements OnInit {
   saleProcess() {
     this.account = this.saleFormGroup.value.account;
     this.accountNumber = this.saleFormGroup.value.accountNumber;
+    const quotas = this.simulationFormGroup.value.quotas;
+
     console.log('saleFunc')
     console.log('saleFunc', this.creditLine)
     console.log('saleFunc', this.requestedAmount)
     console.log('saleFunc', this.offerAmount)
-    console.log('saleFunc', this.account)
-    console.log('saleFunc', this.accountNumber)
+    console.log('account', this.account)
+    console.log('accountNumber', this.accountNumber)
+    console.log('quotas', quotas)
 
+    const account = this.accountNumber.split('-');
+    const termQuotas = quotas.split('-');
+
+    
     let tea: string | null = sessionStorage.getItem('tea');
     let x = tea === null ? '0.14' : tea;
 
 
+    const exp = sessionStorage.getItem('expedientNumber');
+    const productType = sessionStorage.getItem('productType');
 
 
     const saleDto = {
-      expedientNumber: "EXP00001", // FALTA
-      creditType: "HIPOTECARIO", // FALTA
+      expedientNumber: exp,
+      creditType: productType,
       creditLine: this.creditLine,
       requestedAmount: this.requestedAmount,
       agreedAmount: this.offerAmount,
       interestRate: parseFloat(x),
-      quota: "",
-      term: "",
-      hasDebt: false, // FALTA
+      quota: termQuotas[1],
+      term: termQuotas[0],
+      hasDebt: false,
       totalDebtAmount: 0.00,
       disbursementType: this.account,
-      disbursementAccount: this.accountNumber,
+      disbursementAccount: account[0],
       hasAccount: true,
       name: sessionStorage.getItem('name'),
-      lastname: sessionStorage.getItem('lastname'),
+      lastname: sessionStorage.getItem('lastName'),
       gender: sessionStorage.getItem('gender'),
       birthdate: sessionStorage.getItem('birthdate'),
       document: sessionStorage.getItem('documentType'),
@@ -156,6 +167,10 @@ export class ProductConfigComponent implements OnInit {
       phone: sessionStorage.getItem('phone'),
       isClient: true,
     }
+
+    sessionStorage.setItem('term', termQuotas[0]);
+    sessionStorage.setItem('quota', termQuotas[1]);
+    sessionStorage.setItem('totalQuotaAmount', termQuotas[2]);
 
     this.creditService.sale(saleDto).subscribe(res => console.log(res));
     this.router.navigateByUrl('/credit/sale')

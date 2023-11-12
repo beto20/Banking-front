@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CustomerService, ICustomerResponse } from '../../service/customer.service';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { CreditService } from 'src/app/service/credit.service';
 
 @Component({
   selector: 'app-init',
@@ -11,7 +12,8 @@ import { Observable, map } from 'rxjs';
 })
 export class InitComponent implements OnInit {
 
-  constructor(private readonly customerService: CustomerService, 
+  constructor(private readonly customerService: CustomerService,
+    private readonly creditService: CreditService, 
     private readonly router: Router) {}
 
   ngOnInit(): void {
@@ -48,7 +50,30 @@ export class InitComponent implements OnInit {
     });
 
 
-    this.router.navigateByUrl('/dashboard')
+    this.creditService.validateBlacklist(this.client.value.docNumber)
+    .subscribe(res => {
+      console.log(res);
+      if (res.hasBlacklist && res.isRisky) {
+        alert('No se pude continuar con el cliente');
+        this.router.navigateByUrl('/init');
+        sessionStorage.clear();
+        return;
+      }
+
+      if (res.hasBlacklist) {
+        alert('No se pude continuar con el cliente');
+        this.router.navigateByUrl('/init');
+        sessionStorage.clear();
+        return;
+      }
+
+      if (res.isRisky || res.isPotential) {
+        this.router.navigateByUrl('/dashboard')
+        return;
+      }
+
+    })
+
   }
 
 }

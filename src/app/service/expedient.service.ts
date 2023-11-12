@@ -7,16 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class ExpedientService {
 
-  host: string = 'https://afbe5c57d41594d48a6f6580cf160214-2089909704.us-west-2.elb.amazonaws.com';
+  host: string = 'https://ad172ad30c04646e9ba81fcac6dcc17a-813922458.us-west-2.elb.amazonaws.com';
   expedientPath: string = 'alfa-expedient/api/v1/expedients';
 
   constructor(private http: HttpClient) { }
 
-  create(expedientDto: any) {
+  create(product: any) {
     const token = sessionStorage.getItem('session');
     console.log("token:", token);
 
-    console.log("exp 2"+expedientDto)
+    console.log("exp 2"+product)
 
     const name = sessionStorage.getItem('name');
     const middlename = sessionStorage.getItem('name');
@@ -30,11 +30,11 @@ export class ExpedientService {
     const x = Math.round(expNumber)
     
     const request: IExpedientRequest = {
-      productCode: 'CREDITO_0001',
+      productCode: product === 'CREDITO_HIPOTECARIO' ? 'CREDITO_0001' : 'CREDITO_0002',
       expedientNumber: 'EXP_' + x,
       expedientPersonId: '',
       status: 'ACTIVO',
-      productName: 'CREDITO',
+      productName: product,
       description: 'mock',
       name: name + '',
       middleName: middlename + '',
@@ -50,6 +50,7 @@ export class ExpedientService {
     }
 
     sessionStorage.setItem('expedientNumber', request.expedientNumber);
+    sessionStorage.setItem('productType', product);
 
     return this.http.post(`${this.host}/${this.expedientPath}/generate`, request, header);
   }
